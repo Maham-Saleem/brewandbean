@@ -74,6 +74,39 @@ function Home() {
     const allSelected = config.groups.every(g => selections[g.id])
     if (!allSelected) return
 
+    const stamp = Date.now()
+
+    /* BOGO: add two individual items — one paid, one free */
+    if (configuringOffer.id === 'offer-sweet-tooth') {
+      const pastry = selections.pastry
+      addItem({
+        id: 'bogo-p-' + stamp,
+        name: pastry.name,
+        priceNum: pastry.priceNum,
+        price: pastry.price,
+        image: pastry.image,
+        isOffer: true,
+        offerBadge: 'BOGO',
+        offerValid: configuringOffer.valid,
+        originalPriceNum: pastry.priceNum * 2,
+        discountAmount: pastry.priceNum,
+        offerSummary: `${pastry.name} × 2 (Buy 1 Get 1)`,
+      })
+      addItem({
+        id: 'bogo-f-' + stamp,
+        name: pastry.name,
+        priceNum: 0,
+        price: '$0.00',
+        image: pastry.image,
+        isOffer: true,
+        offerBadge: 'FREE',
+        offerValid: configuringOffer.valid,
+      })
+      setConfiguringOffer(null)
+      setSelections({})
+      return
+    }
+
     const originalPriceNum = config.calcOriginalPrice ? config.calcOriginalPrice(selections) : config.calcPrice(selections)
     const finalPrice = config.calcPrice(selections)
     const discountAmount = originalPriceNum - finalPrice
@@ -81,7 +114,7 @@ function Home() {
     const chosenItems = config.groups.map(g => selections[g.id])
 
     addItem({
-      id: configuringOffer.id + '-' + Date.now(),
+      id: configuringOffer.id + '-' + stamp,
       name: configuringOffer.title,
       priceNum: finalPrice,
       price: `$${finalPrice.toFixed(2)}`,
