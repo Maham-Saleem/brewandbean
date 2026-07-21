@@ -87,6 +87,26 @@ export function AuthProvider({ children }) {
   const removeAddress = useCallback((id) => {
     if (!currentUser) return
     const updatedUser = { ...currentUser, addresses: currentUser.addresses.filter(a => a.id !== id) }
+    if (updatedUser.defaultAddressId === id) delete updatedUser.defaultAddressId
+    setCurrentUser(updatedUser)
+    localStorage.setItem('bb_current_user', JSON.stringify(updatedUser))
+    persistUsers({ ...users, [currentUser.email]: updatedUser })
+  }, [currentUser, users])
+
+  const updateAddress = useCallback((id, updates) => {
+    if (!currentUser) return
+    const updatedUser = {
+      ...currentUser,
+      addresses: currentUser.addresses.map(a => a.id === id ? { ...a, ...updates } : a),
+    }
+    setCurrentUser(updatedUser)
+    localStorage.setItem('bb_current_user', JSON.stringify(updatedUser))
+    persistUsers({ ...users, [currentUser.email]: updatedUser })
+  }, [currentUser, users])
+
+  const setDefaultAddress = useCallback((id) => {
+    if (!currentUser) return
+    const updatedUser = { ...currentUser, defaultAddressId: id }
     setCurrentUser(updatedUser)
     localStorage.setItem('bb_current_user', JSON.stringify(updatedUser))
     persistUsers({ ...users, [currentUser.email]: updatedUser })
@@ -103,7 +123,7 @@ export function AuthProvider({ children }) {
   }, [currentUser, users])
 
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login, forgotPassword, logout, updateProfile, addAddress, removeAddress, addOrder }}>
+    <AuthContext.Provider value={{ currentUser, signup, login, forgotPassword, logout, updateProfile, addAddress, removeAddress, updateAddress, setDefaultAddress, addOrder }}>
       {children}
     </AuthContext.Provider>
   )
