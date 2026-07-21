@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import './Menu.css'
 
@@ -75,9 +74,9 @@ export const menuItems = [
 ]
 
 const offers = [
-  { title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop' },
-  { title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop' },
-  { title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop' },
+  { id: 'offer-morning-bliss', title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop', priceNum: 6.20, items: [{ name: 'Espresso', price: '$3.50' }, { name: 'Croissant', price: '$4.25' }] },
+  { id: 'offer-sweet-tooth', title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop', priceNum: 4.25, items: [{ name: 'Croissant × 2', price: '$4.25' }] },
+  { id: 'offer-chill-hour', title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop', priceNum: 3.75, items: [{ name: 'Cold Brew', price: '$3.75' }] },
 ]
 
 function Menu() {
@@ -85,6 +84,20 @@ function Menu() {
   const { addItem } = useCart()
 
   const featuredItems = menuItems.filter(item => item.featured)
+
+  const addOfferToCart = (offer) => {
+    addItem({
+      id: offer.id,
+      name: offer.title,
+      priceNum: offer.priceNum,
+      price: `$${offer.priceNum.toFixed(2)}`,
+      image: offer.image,
+      isOffer: true,
+      offerBadge: offer.badge,
+      offerValid: offer.valid,
+      offerItems: offer.items,
+    })
+  }
 
   const renderStars = (rating) => {
     const full = Math.floor(rating)
@@ -169,7 +182,7 @@ function Menu() {
                   <h3>{offer.title}</h3>
                   <p className="special-desc">{offer.desc}</p>
                   <span className="special-valid">{offer.valid}</span>
-                  <Link to="/menu" className="btn-special">Order Now</Link>
+                  <button className="btn-special" onClick={() => addOfferToCart(offer)}>Add to Cart — ${offer.priceNum.toFixed(2)}</button>
                 </div>
               </div>
             ))}

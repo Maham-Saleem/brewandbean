@@ -99,6 +99,7 @@ function Checkout() {
             <img src={item.image} alt={item.name} />
             <div className="cart-step-info">
               <h4>{item.name}</h4>
+              {item.isOffer && <span className="cart-offer-badge">Today's Special</span>}
               <p className="cart-step-unit-price">${item.priceNum.toFixed(2)} each</p>
             </div>
             <div className="cart-step-qty">
