@@ -383,7 +383,7 @@
   }
 }
 
-/* ── Tablet: 2-column specials grid (768px–1023px) ── */
+/* ── Tablet: 2-column grid (below 1024px) ── */
 
 @media (max-width: 1023px) {
   .specials-grid {
@@ -445,30 +445,29 @@
   .section-heading-row h2 {
     font-size: 1.3rem;
   }
-  .special-image {
-    height: 160px;
-  }
-}
 
-/* ── Mobile (below 768px): full-width specials cards ── */
-
-@media (max-width: 767px) {
+  /* ── Mobile specials: single full-width card ── */
   .specials-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    max-width: 600px;
+    max-width: 560px;
     margin-left: auto;
     margin-right: auto;
   }
   .special-card {
     border-radius: 14px;
     box-shadow: 0 3px 14px rgba(74, 44, 42, 0.07);
+    display: flex;
+    flex-direction: column;
   }
   .special-image {
     height: 180px;
   }
   .special-body {
     padding: 1.15rem 1.25rem 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   .special-body h3 {
     font-size: 1.1rem;
@@ -478,6 +477,7 @@
     font-size: 0.88rem;
     margin-bottom: 0.55rem;
     line-height: 1.55;
+    flex: 1;
   }
   .special-valid {
     font-size: 0.8rem;
@@ -491,32 +491,7 @@
     min-height: 46px;
     border-radius: 24px;
     font-weight: 700;
-  }
-}
-
-@media (max-width: 480px) {
-  .today-specials {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-  .specials-grid {
-    gap: 1.25rem;
-  }
-  .special-card {
-    border-radius: 12px;
-  }
-  .special-image {
-    height: 160px;
-  }
-  .special-body {
-    padding: 0.9rem 1rem 1.1rem;
-  }
-  .special-body h3 {
-    font-size: 1.05rem;
-  }
-  .specials-title {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+    align-self: stretch;
   }
 }
 
@@ -604,6 +579,25 @@
     font-size: 0.82rem;
     padding: 0.65rem 0.85rem;
     min-height: 44px;
+  }
+
+  /* ── Specials refinements ── */
+  .specials-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .specials-grid {
+    gap: 1.25rem;
+    max-width: 100%;
+  }
+  .special-image {
+    height: 160px;
+  }
+  .special-body {
+    padding: 0.9rem 1rem 1.1rem;
+  }
+  .special-body h3 {
+    font-size: 1.05rem;
   }
 }
 
