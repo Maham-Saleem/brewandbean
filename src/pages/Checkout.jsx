@@ -425,9 +425,9 @@ function Checkout() {
 
     const paymentOptions = [
       { id: 'cash', label: cashLabel, desc: cashDesc, icon: SVG_ICONS.cash },
-      { id: 'card', label: 'Credit / Debit Card', desc: 'Demo — no real payment processed', icon: SVG_ICONS.card },
-      { id: 'jazzcash', label: 'JazzCash', desc: 'Demo — no real payment processed', icon: SVG_ICONS.zap },
-      { id: 'easypaisa', label: 'EasyPaisa', desc: 'Demo — no real payment processed', icon: SVG_ICONS.dollar },
+      { id: 'card', label: 'Credit / Debit Card', desc: 'Secure payment via card', icon: SVG_ICONS.card },
+      { id: 'jazzcash', label: 'JazzCash', desc: 'Pay with your JazzCash account', icon: SVG_ICONS.zap },
+      { id: 'easypaisa', label: 'EasyPaisa', desc: 'Pay with your EasyPaisa account', icon: SVG_ICONS.dollar },
     ]
 
     return (
