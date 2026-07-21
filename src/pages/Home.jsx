@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
 import './Home.css'
 
 const offers = [
-  { title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop' },
-  { title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop' },
-  { title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop' },
-  { title: 'Brew & Bean Rewards', desc: 'Buy 9 drinks and get your 10th free. Every sip brings you closer.', badge: 'LOYALTY', valid: 'Ongoing — Ask In-Store', image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500&h=350&fit=crop' },
+  { id: 'offer-morning-bliss', title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop', priceNum: 6.20, items: [{ name: 'Espresso', price: '$3.50' }, { name: 'Croissant', price: '$4.25' }] },
+  { id: 'offer-sweet-tooth', title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop', priceNum: 4.25, items: [{ name: 'Croissant × 2', price: '$4.25' }] },
+  { id: 'offer-chill-hour', title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop', priceNum: 3.75, items: [{ name: 'Cold Brew', price: '$3.75' }] },
 ]
 
 const featuredDrinks = [
@@ -22,6 +22,22 @@ const testimonials = [
 ]
 
 function Home() {
+  const { addItem } = useCart()
+
+  const addOfferToCart = (offer) => {
+    addItem({
+      id: offer.id,
+      name: offer.title,
+      priceNum: offer.priceNum,
+      price: `$${offer.priceNum.toFixed(2)}`,
+      image: offer.image,
+      isOffer: true,
+      offerBadge: offer.badge,
+      offerValid: offer.valid,
+      offerItems: offer.items,
+    })
+  }
+
   return (
     <div className="home">
       <section className="hero">
@@ -53,7 +69,7 @@ function Home() {
                   <h3>{offer.title}</h3>
                   <p className="offer-desc">{offer.desc}</p>
                   <span className="offer-valid">{offer.valid}</span>
-                  <Link to="/menu" className="btn-offer">Claim Offer</Link>
+                  <button className="btn-offer" onClick={() => addOfferToCart(offer)}>Add to Cart — ${offer.priceNum.toFixed(2)}</button>
                 </div>
               </div>
             ))}
