@@ -27,6 +27,7 @@ function Navbar() {
             <NavLink to="/menu" onClick={closeMenu}>Menu</NavLink>
             <NavLink to="/gallery" onClick={closeMenu}>Gallery</NavLink>
             <NavLink to="/contact" onClick={closeMenu}>Contact</NavLink>
+            <NavLink to="/account" onClick={closeMenu}>Account</NavLink>
           </div>
 
           <div className="navbar-actions">
