@@ -10,7 +10,7 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(44,24,16,0.7) 0%, rgba(74,44,42,0.5) 100%);
+  background: linear-gradient(135deg, rgba(44,24,16,0.65) 0%, rgba(74,44,42,0.45) 100%);
 }
 
 .hero-content {
@@ -18,6 +18,11 @@
   text-align: center;
   color: var(--color-white);
   animation: fadeIn 1s ease;
+  padding: 2.5rem 3rem;
+  background: rgba(44, 24, 16, 0.2);
+  border-radius: 16px;
+  max-width: 700px;
+  backdrop-filter: blur(2px);
 }
 
 .hero-badge {
@@ -60,11 +65,31 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.hero-actions .btn {
+  padding: 0.9rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.hero-actions .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(74, 44, 42, 0.3);
+}
+
+.hero-actions .btn-primary:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 44, 42, 0.4);
 }
 
 .hero-actions .btn-outline {
   border-color: var(--color-white);
   color: var(--color-white);
+  border-width: 2px;
 }
 
 .hero-actions .btn-outline:hover {
