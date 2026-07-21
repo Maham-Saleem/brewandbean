@@ -84,7 +84,7 @@
   font-size: 0.95rem;
   border: 2px solid var(--color-border);
   border-radius: 6px;
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-text);
   transition: var(--transition);
   outline: none;

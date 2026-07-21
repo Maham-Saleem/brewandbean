@@ -30,7 +30,7 @@
 /* ── Sidebar ── */
 
 .ac-sidebar {
-  background: var(--color-white);
+  background: var(--color-surface);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 2px 12px rgba(74, 44, 42, 0.06);
@@ -113,7 +113,7 @@
 }
 
 .ac-card {
-  background: var(--color-white);
+  background: var(--color-surface);
   border-radius: 12px;
   padding: 1.75rem 2rem;
   box-shadow: 0 2px 12px rgba(74, 44, 42, 0.06);
@@ -318,7 +318,7 @@
   padding: 0.85rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: var(--color-white);
+  background: var(--color-surface);
   transition: var(--transition);
 }
 
