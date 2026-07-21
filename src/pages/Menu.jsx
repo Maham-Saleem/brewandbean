@@ -163,15 +163,17 @@ function Menu() {
             ))}
           </div>
 
-          <div className="featured-section fade-in">
-            <div className="section-heading-row">
-              <h2>✦ Barista's Favorites</h2>
-              <p>Handpicked favorites, loved by our customers</p>
+          {activeCategory === 'all' && (
+            <div className="featured-section">
+              <div className="section-heading-row">
+                <h2>✦ Barista's Favorites</h2>
+                <p>Handpicked favorites, loved by our customers</p>
+              </div>
+              <div className="featured-grid fade-in">
+                {featuredItems.map(item => renderFeaturedCard(item))}
+              </div>
             </div>
-            <div className="featured-grid">
-              {featuredItems.map(item => renderFeaturedCard(item))}
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
