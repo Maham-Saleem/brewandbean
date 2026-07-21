@@ -2,19 +2,55 @@ import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import './Menu.css'
 
+const IconAll = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
+  </svg>
+)
+
+const IconCoffee = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 8h1a4 4 0 1 1 0 8h-1" /><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+    <line x1="6" y1="2" x2="6" y2="4" /><line x1="10" y1="2" x2="10" y2="4" /><line x1="14" y1="2" x2="14" y2="4" />
+  </svg>
+)
+
+const IconTea = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10" /><path d="M17 2c-2 2-2 5-2 8s0 6 2 8" />
+    <path d="M22 12c0-3-1.5-5.5-4-7" />
+  </svg>
+)
+
+const IconCold = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M8 2v4M16 2v4M12 2v4" /><rect x="6" y="8" width="12" height="14" rx="2" />
+    <path d="M6 14h12" />
+  </svg>
+)
+
+const IconDessert = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 8V2" /><path d="M8 8h8" />
+    <path d="M4 14h16c0 4-3 6-8 6s-8-2-8-6Z" />
+    <circle cx="12" cy="5" r="2" fill="#C4956A" stroke="none" />
+  </svg>
+)
+
 const categories = [
-  { id: 'all', label: 'All', icon: '⊞' },
-  { id: 'coffee', label: 'Coffee', icon: '☕' },
-  { id: 'tea', label: 'Tea', icon: '🍵' },
-  { id: 'cold', label: 'Iced Drinks', icon: '🧊' },
-  { id: 'desserts', label: 'Desserts', icon: '🍰' },
+  { id: 'all', label: 'All', Icon: IconAll },
+  { id: 'coffee', label: 'Coffee', Icon: IconCoffee },
+  { id: 'tea', label: 'Tea', Icon: IconTea },
+  { id: 'cold', label: 'Iced Drinks', Icon: IconCold },
+  { id: 'desserts', label: 'Desserts', Icon: IconDessert },
 ]
 
 const categoryMeta = {
-  coffee: { icon: '☕', desc: 'Classic brews and espresso-based favorites. Made fresh, every time.' },
-  tea: { icon: '🍵', desc: 'Hand-selected teas from the finest gardens around the world.' },
-  cold: { icon: '🧊', desc: 'Refreshing iced beverages perfect for any time of day.' },
-  desserts: { icon: '🍰', desc: 'Sweet treats baked fresh daily to pair with your drink.' },
+  coffee: { Icon: IconCoffee, desc: 'Classic brews and espresso-based favorites. Made fresh, every time.' },
+  tea: { Icon: IconTea, desc: 'Hand-selected teas from the finest gardens around the world.' },
+  cold: { Icon: IconCold, desc: 'Refreshing iced beverages perfect for any time of day.' },
+  desserts: { Icon: IconDessert, desc: 'Sweet treats baked fresh daily to pair with your drink.' },
 }
 
 export const menuItems = [
@@ -121,7 +157,7 @@ function Menu() {
                 className={`category-pill ${activeCategory === cat.id ? 'active' : ''}`}
                 onClick={() => setActiveCategory(cat.id)}
               >
-                <span className="pill-icon">{cat.icon}</span>
+                <cat.Icon />
                 <span className="pill-label">{cat.label}</span>
               </button>
             ))}
@@ -150,7 +186,7 @@ function Menu() {
               <div className="container">
                 <div className="section-header fade-in">
                   <div className="section-header-left">
-                    <span className="section-icon">{meta.icon}</span>
+                    <meta.Icon />
                     <h2>{cat.label}</h2>
                   </div>
                   <p className="section-header-desc">{meta.desc}</p>
@@ -170,9 +206,9 @@ function Menu() {
               const meta = categoryMeta[activeCategory]
               return (
                 <>
-                  <div className="section-header fade-in">
+                   <div className="section-header fade-in">
                     <div className="section-header-left">
-                      <span className="section-icon">{meta.icon}</span>
+                      <meta.Icon />
                       <h2>{cat.label}</h2>
                     </div>
                     <p className="section-header-desc">{meta.desc}</p>

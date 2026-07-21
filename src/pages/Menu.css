@@ -62,9 +62,18 @@
   color: var(--color-white);
 }
 
-.pill-icon {
-  font-size: 0.95rem;
-  line-height: 1;
+.category-pill.active svg path,
+.category-pill.active svg rect,
+.category-pill.active svg line {
+  stroke: var(--color-white);
+}
+
+.category-pill.active svg circle {
+  fill: var(--color-white);
+}
+
+.category-pill svg {
+  flex-shrink: 0;
 }
 
 .pill-label {
@@ -326,9 +335,8 @@
   gap: 0.5rem;
 }
 
-.section-icon {
-  font-size: 1.1rem;
-  line-height: 1;
+.section-header-left svg {
+  flex-shrink: 0;
 }
 
 .section-header h2 {
