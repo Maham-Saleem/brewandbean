@@ -42,11 +42,13 @@ function CartDrawer({ isOpen, onClose }) {
                       </div>
                     )}
                     <span className="cart-item-price">${(item.priceNum * item.quantity).toFixed(2)}</span>
-                    <div className="cart-qty">
-                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>−</button>
-                      <span>{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
-                    </div>
+                    {!item.bogoPairId && (
+                      <div className="cart-qty">
+                        <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>−</button>
+                        <span>{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                      </div>
+                    )}
                   </div>
                   <button className="cart-item-remove" onClick={() => removeItem(item.id)}>✕</button>
                 </div>

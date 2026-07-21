@@ -79,8 +79,10 @@ function Home() {
     /* BOGO: add two individual items — one paid, one free */
     if (configuringOffer.id === 'offer-sweet-tooth') {
       const pastry = selections.pastry
+      const paidId = 'bogo-p-' + stamp
+      const freeId = 'bogo-f-' + stamp
       addItem({
-        id: 'bogo-p-' + stamp,
+        id: paidId,
         name: pastry.name,
         priceNum: pastry.priceNum,
         price: pastry.price,
@@ -91,9 +93,10 @@ function Home() {
         originalPriceNum: pastry.priceNum * 2,
         discountAmount: pastry.priceNum,
         offerSummary: `${pastry.name} × 2 (Buy 1 Get 1)`,
+        bogoPairId: freeId,
       })
       addItem({
-        id: 'bogo-f-' + stamp,
+        id: freeId,
         name: pastry.name,
         priceNum: 0,
         price: '$0.00',
@@ -101,6 +104,7 @@ function Home() {
         isOffer: true,
         offerBadge: 'FREE',
         offerValid: configuringOffer.valid,
+        bogoPairId: paidId,
       })
       setConfiguringOffer(null)
       setSelections({})

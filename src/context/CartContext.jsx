@@ -17,11 +17,21 @@ export function CartProvider({ children }) {
 
   const updateQuantity = useCallback((id, quantity) => {
     if (quantity < 1) return
-    setCartItems(prev => prev.map(i => i.id === id ? { ...i, quantity } : i))
+    setCartItems(prev => {
+      const item = prev.find(i => i.id === id)
+      if (item?.bogoPairId) return prev
+      return prev.map(i => i.id === id ? { ...i, quantity } : i)
+    })
   }, [])
 
   const removeItem = useCallback((id) => {
-    setCartItems(prev => prev.filter(i => i.id !== id))
+    setCartItems(prev => {
+      const item = prev.find(i => i.id === id)
+      if (item?.bogoPairId) {
+        return prev.filter(i => i.id !== id && i.id !== item.bogoPairId)
+      }
+      return prev.filter(i => i.id !== id)
+    })
   }, [])
 
   const clearCart = useCallback(() => {

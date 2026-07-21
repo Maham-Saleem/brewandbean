@@ -624,6 +624,15 @@
   cursor: not-allowed;
 }
 
+.co-qty-fixed {
+  min-width: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  display: inline-block;
+}
+
 .co-review-qty span {
   min-width: 20px;
   text-align: center;

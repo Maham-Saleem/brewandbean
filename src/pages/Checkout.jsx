@@ -392,9 +392,15 @@ function Checkout() {
                 <span className="co-unit-price">${item.priceNum.toFixed(2)} each</span>
             </div>
             <div className="co-review-qty">
-              <button className="co-qty-btn" onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>−</button>
-              <span>{item.quantity}</span>
-              <button className="co-qty-btn" onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+              {!item.bogoPairId ? (
+                <>
+                  <button className="co-qty-btn" onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>−</button>
+                  <span>{item.quantity}</span>
+                  <button className="co-qty-btn" onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                </>
+              ) : (
+                <span className="co-qty-fixed">1</span>
+              )}
             </div>
             <span className="co-review-total">${(item.priceNum * item.quantity).toFixed(2)}</span>
             <button className="co-review-remove" onClick={() => removeItem(item.id)} title="Remove item">{SVG_ICONS.trash}</button>
