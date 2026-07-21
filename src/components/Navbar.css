@@ -95,7 +95,38 @@
 }
 
 @media (max-width: 768px) {
-  .hamburger {
+.cart-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-light);
+  padding: 6px;
+  transition: var(--transition);
+  margin-left: 0.5rem;
+}
+
+.cart-btn:hover {
+  color: var(--color-primary);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  background: var(--color-secondary);
+  color: var(--color-white);
+  font-size: 0.65rem;
+  font-weight: 600;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger {
     display: flex;
   }
 
