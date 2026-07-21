@@ -2,6 +2,12 @@
 
 .account-page {
   min-height: 60vh;
+  background: var(--color-light);
+  padding-top: 1px;
+}
+
+.account-page > .section:first-child {
+  padding-top: 2.5rem;
 }
 
 .ac-layout {
