@@ -156,11 +156,10 @@
 }
 
 .featured-card-body {
-  padding: 0.9rem 0.9rem 0.9rem;
+  padding: 0.9rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
 }
 
 /* ── Menu Card (Horizontal) ── */
@@ -207,7 +206,6 @@
   padding: 0.75rem 0.85rem 0.75rem 0.7rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
 }
 
 /* ── Shared Card Styles ── */
@@ -217,6 +215,8 @@
   justify-content: space-between;
   align-items: baseline;
   gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  min-height: 2.5rem;
 }
 
 .card-name-row h3 {
@@ -238,6 +238,7 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  margin-bottom: 0.35rem;
   min-height: 1.2rem;
 }
 
@@ -275,6 +276,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 2.34rem;
+  margin-bottom: 0.35rem;
 }
 
 .card-tags {
@@ -283,6 +285,7 @@
   gap: 0.25rem;
   min-height: 1.25rem;
   align-content: flex-start;
+  margin-bottom: 0.55rem;
 }
 
 .tag {
