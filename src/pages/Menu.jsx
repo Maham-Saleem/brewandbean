@@ -3,12 +3,19 @@ import { useCart } from '../context/CartContext'
 import './Menu.css'
 
 const categories = [
-  { id: 'all', label: 'All Items' },
-  { id: 'coffee', label: 'Coffee' },
-  { id: 'tea', label: 'Tea' },
-  { id: 'cold', label: 'Iced Drinks' },
-  { id: 'desserts', label: 'Desserts' },
+  { id: 'all', label: 'All', icon: '⊞' },
+  { id: 'coffee', label: 'Coffee', icon: '☕' },
+  { id: 'tea', label: 'Tea', icon: '🍵' },
+  { id: 'cold', label: 'Iced Drinks', icon: '🧊' },
+  { id: 'desserts', label: 'Desserts', icon: '🍰' },
 ]
+
+const categoryMeta = {
+  coffee: { icon: '☕', desc: 'Classic brews and espresso-based favorites. Made fresh, every time.' },
+  tea: { icon: '🍵', desc: 'Hand-selected teas from the finest gardens around the world.' },
+  cold: { icon: '🧊', desc: 'Refreshing iced beverages perfect for any time of day.' },
+  desserts: { icon: '🍰', desc: 'Sweet treats baked fresh daily to pair with your drink.' },
+}
 
 export const menuItems = [
   { id: 1, category: 'coffee', name: 'Espresso', desc: 'Rich single-origin espresso shot with honey undertones', price: '$3.50', priceNum: 3.50, rating: 4.8, featured: true, tags: ['Hot', 'Strong'], image: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=500&h=360&fit=crop' },
@@ -20,14 +27,14 @@ export const menuItems = [
   { id: 7, category: 'tea', name: 'Matcha', desc: 'Premium ceremonial-grade matcha whisked to perfection', price: '$4.50', priceNum: 4.50, rating: 4.7, featured: true, tags: ['Hot', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=500&h=360&fit=crop' },
   { id: 8, category: 'tea', name: 'Chamomile', desc: 'Calming herbal blend with honey and lavender', price: '$3.50', priceNum: 3.50, rating: 4.4, featured: false, tags: ['Hot'], image: 'https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=500&h=360&fit=crop' },
   { id: 9, category: 'tea', name: 'Chai Latte', desc: 'Spiced black tea concentrate with steamed milk', price: '$5.00', priceNum: 5.00, rating: 4.6, featured: false, tags: ['Hot', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500&h=360&fit=crop' },
-  { id: 10, category: 'cold', name: 'Iced Latte', desc: 'Chilled espresso over milk, served over ice', price: '$5.00', priceNum: 5.00, rating: 4.7, featured: false, tags: ['Cold', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=360&fit=crop' },
-  { id: 11, category: 'cold', name: 'Cold Brew', desc: 'Slow-steeped 20 hours for smooth richness', price: '$4.75', priceNum: 4.75, rating: 4.9, featured: true, tags: ['Cold', 'Strong'], image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=500&h=360&fit=crop' },
-  { id: 12, category: 'cold', name: 'Frappé', desc: 'Blended coffee with vanilla and whipped cream', price: '$5.95', priceNum: 5.95, rating: 4.6, featured: false, tags: ['Cold', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=500&h=360&fit=crop' },
-  { id: 13, category: 'cold', name: 'Iced Matcha', desc: 'Chilled matcha with oat milk over ice', price: '$5.25', priceNum: 5.25, rating: 4.5, featured: false, tags: ['Cold', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&h=360&fit=crop' },
-  { id: 14, category: 'desserts', name: 'Tiramisu', desc: 'Classic Italian coffee-soaked ladyfingers', price: '$6.50', priceNum: 6.50, rating: 4.9, featured: true, tags: ['Vegan Option'], image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=500&h=360&fit=crop' },
-  { id: 15, category: 'desserts', name: 'Croissant', desc: 'Buttery, flaky French pastry, baked fresh daily', price: '$4.25', priceNum: 4.25, rating: 4.7, featured: false, tags: ['Vegan Option'], image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=360&fit=crop' },
-  { id: 16, category: 'desserts', name: 'Cheesecake', desc: 'Creamy New York style with berry compote', price: '$6.75', priceNum: 6.75, rating: 4.8, featured: true, tags: [], image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=500&h=360&fit=crop' },
-  { id: 17, category: 'desserts', name: 'Chocolate Brownie', desc: 'Rich dark chocolate brownie with sea salt', price: '$5.50', priceNum: 5.50, rating: 4.7, featured: false, tags: ['Vegan Option'], image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&h=360&fit=crop' },
+  { id: 10, category: 'cold', name: 'Iced Latte', desc: 'Chilled espresso over milk, served over ice', price: '$5.00', priceNum: 5.00, rating: 4.7, featured: false, tags: ['Iced', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=360&fit=crop' },
+  { id: 11, category: 'cold', name: 'Cold Brew', desc: 'Slow-steeped 20 hours for smooth richness', price: '$4.75', priceNum: 4.75, rating: 4.9, featured: true, tags: ['Iced', 'Strong'], image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=500&h=360&fit=crop' },
+  { id: 12, category: 'cold', name: 'Frappé', desc: 'Blended coffee with vanilla and whipped cream', price: '$5.95', priceNum: 5.95, rating: 4.6, featured: false, tags: ['Iced', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=500&h=360&fit=crop' },
+  { id: 13, category: 'cold', name: 'Iced Matcha', desc: 'Chilled matcha with oat milk over ice', price: '$5.25', priceNum: 5.25, rating: 4.5, featured: false, tags: ['Iced', 'Milk-Based'], image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&h=360&fit=crop' },
+  { id: 14, category: 'desserts', name: 'Tiramisu', desc: 'Classic Italian coffee-soaked ladyfingers', price: '$6.50', priceNum: 6.50, rating: 4.9, featured: true, tags: ['Dessert'], image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=500&h=360&fit=crop' },
+  { id: 15, category: 'desserts', name: 'Croissant', desc: 'Buttery, flaky French pastry, baked fresh daily', price: '$4.25', priceNum: 4.25, rating: 4.7, featured: false, tags: ['Pastry'], image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=360&fit=crop' },
+  { id: 16, category: 'desserts', name: 'Cheesecake', desc: 'Creamy New York style with berry compote', price: '$6.75', priceNum: 6.75, rating: 4.8, featured: true, tags: ['Dessert'], image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=500&h=360&fit=crop' },
+  { id: 17, category: 'desserts', name: 'Chocolate Brownie', desc: 'Rich dark chocolate brownie with sea salt', price: '$5.50', priceNum: 5.50, rating: 4.7, featured: false, tags: ['Dessert'], image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&h=360&fit=crop' },
 ]
 
 function Menu() {
@@ -35,9 +42,6 @@ function Menu() {
   const { addItem } = useCart()
 
   const featuredItems = menuItems.filter(item => item.featured)
-  const filteredItems = activeCategory === 'all'
-    ? menuItems
-    : menuItems.filter(item => item.category === activeCategory)
 
   const renderStars = (rating) => {
     const full = Math.floor(rating)
@@ -51,30 +55,49 @@ function Menu() {
     )
   }
 
-  const renderItem = (item) => (
-    <div className="menu-card" key={item.id}>
-      <div className="menu-card-image">
+  const renderFeaturedCard = (item) => (
+    <div className="featured-card" key={item.id}>
+      <div className="featured-card-image">
         <img src={item.image} alt={item.name} loading="lazy" />
-        {item.featured && <span className="menu-card-badge">Barista's Pick</span>}
+        <span className="pick-badge">BARISTA'S PICK</span>
       </div>
-      <div className="menu-card-body">
-        <div className="menu-card-top">
-          <h3 className="menu-card-name">{item.name}</h3>
-          <span className="menu-card-price">{item.price}</span>
+      <div className="featured-card-body">
+        <div className="card-name-row">
+          <h3>{item.name}</h3>
+          <span className="card-price">{item.price}</span>
         </div>
-        <div className="menu-card-rating">
+        <div className="card-rating">
           {renderStars(item.rating)}
           <span className="rating-number">{item.rating}</span>
         </div>
-        <p className="menu-card-desc">{item.desc}</p>
-        <div className="menu-card-footer">
-          <div className="menu-card-tags">
-            {item.tags.map((tag, i) => (
-              <span className="menu-tag" key={i}>{tag}</span>
-            ))}
-          </div>
-          <button className="btn btn-primary btn-add-cart" onClick={() => addItem(item)}>+ Add</button>
+        <p className="card-desc">{item.desc}</p>
+        <div className="card-tags">
+          {item.tags.map((tag, i) => (
+            <span className="tag" key={i}>{tag}</span>
+          ))}
         </div>
+        <button className="btn-add-cart" onClick={() => addItem(item)}>+ Add to Cart</button>
+      </div>
+    </div>
+  )
+
+  const renderMenuCard = (item) => (
+    <div className="menu-card" key={item.id}>
+      <div className="menu-card-image">
+        <img src={item.image} alt={item.name} loading="lazy" />
+      </div>
+      <div className="menu-card-body">
+        <div className="card-name-row">
+          <h3>{item.name}</h3>
+          <span className="card-price">{item.price}</span>
+        </div>
+        <p className="card-desc">{item.desc}</p>
+        <div className="card-tags">
+          {item.tags.map((tag, i) => (
+            <span className="tag" key={i}>{tag}</span>
+          ))}
+        </div>
+        <button className="btn-add-cart" onClick={() => addItem(item)}>+ Add to Cart</button>
       </div>
     </div>
   )
@@ -91,38 +114,78 @@ function Menu() {
 
       <section className="menu-section">
         <div className="container">
-          <div className="category-nav fade-in">
+          <div className="category-pills fade-in">
             {categories.map(cat => (
               <button
                 key={cat.id}
-                className={`category-link ${activeCategory === cat.id ? 'active' : ''}`}
+                className={`category-pill ${activeCategory === cat.id ? 'active' : ''}`}
                 onClick={() => setActiveCategory(cat.id)}
               >
-                {cat.label}
+                <span className="pill-icon">{cat.icon}</span>
+                <span className="pill-label">{cat.label}</span>
               </button>
             ))}
           </div>
 
           <div className="featured-section fade-in">
-            <div className="featured-header">
-              <span className="featured-icon">✦</span>
-              <h2>Barista's Favorites</h2>
+            <div className="section-heading-row">
+              <h2>✦ Barista's Favorites</h2>
+              <p>Handpicked favorites, loved by our customers</p>
             </div>
-            <p className="featured-sub">The drinks and treats our team reaches for on every shift</p>
             <div className="featured-grid">
-              {featuredItems.slice(0, 4).map(item => renderItem(item))}
+              {featuredItems.map(item => renderFeaturedCard(item))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="menu-section menu-section-alt">
-        <div className="container">
-          <div className="menu-grid fade-in">
-            {filteredItems.map(item => renderItem(item))}
+      {activeCategory === 'all' ? (
+        Object.keys(categoryMeta).map(catId => {
+          const cat = categories.find(c => c.id === catId)
+          const meta = categoryMeta[catId]
+          const items = menuItems.filter(item => item.category === catId)
+          if (!items.length) return null
+          return (
+            <section className="menu-section category-section" key={catId}>
+              <div className="container">
+                <div className="section-header fade-in">
+                  <div className="section-header-left">
+                    <span className="section-icon">{meta.icon}</span>
+                    <h2>{cat.label}</h2>
+                  </div>
+                  <p className="section-header-desc">{meta.desc}</p>
+                </div>
+                <div className="menu-grid fade-in">
+                  {items.map(item => renderMenuCard(item))}
+                </div>
+              </div>
+            </section>
+          )
+        })
+      ) : (
+        <section className="menu-section category-section">
+          <div className="container">
+            {(() => {
+              const cat = categories.find(c => c.id === activeCategory)
+              const meta = categoryMeta[activeCategory]
+              return (
+                <>
+                  <div className="section-header fade-in">
+                    <div className="section-header-left">
+                      <span className="section-icon">{meta.icon}</span>
+                      <h2>{cat.label}</h2>
+                    </div>
+                    <p className="section-header-desc">{meta.desc}</p>
+                  </div>
+                  <div className="menu-grid fade-in">
+                    {menuItems.filter(item => item.category === activeCategory).map(item => renderMenuCard(item))}
+                  </div>
+                </>
+              )
+            })()}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   )
 }
