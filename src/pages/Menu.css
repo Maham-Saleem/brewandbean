@@ -383,11 +383,19 @@
   }
 }
 
-/* ── Tablet: 2-column specials grid (768px–1023px) ── */
+/* ── Tablet: 2-column specials grid (768px+) ── */
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) {
   .specials-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Desktop: 3-column specials grid (1024px+) ── */
+
+@media (min-width: 1024px) {
+  .specials-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -448,11 +456,7 @@
 
   /* ── Mobile specials: single full-width card ── */
   .specials-grid {
-    grid-template-columns: 1fr;
     gap: 1.5rem;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
   }
   .special-card {
     border-radius: 14px;
@@ -587,9 +591,7 @@
     margin-bottom: 1rem;
   }
   .specials-grid {
-    grid-template-columns: 1fr;
     gap: 1.25rem;
-    max-width: 100%;
   }
   .special-image {
     height: 160px;
@@ -618,7 +620,7 @@
 
 .specials-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
