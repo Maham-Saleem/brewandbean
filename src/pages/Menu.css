@@ -383,9 +383,9 @@
   }
 }
 
-/* ── Tablet: 2-column grid (below 1024px) ── */
+/* ── Tablet: 2-column specials grid (768px–1023px) ── */
 
-@media (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .specials-grid {
     grid-template-columns: repeat(2, 1fr);
   }
