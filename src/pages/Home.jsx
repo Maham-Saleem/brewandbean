@@ -1,12 +1,39 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { menuItems } from './Menu'
 import './Home.css'
 
 const offers = [
-  { id: 'offer-morning-bliss', title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop', priceNum: 6.20, items: [{ name: 'Espresso', price: '$3.50' }, { name: 'Croissant', price: '$4.25' }] },
-  { id: 'offer-sweet-tooth', title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop', priceNum: 4.25, items: [{ name: 'Croissant × 2', price: '$4.25' }] },
-  { id: 'offer-chill-hour', title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop', priceNum: 3.75, items: [{ name: 'Cold Brew', price: '$3.75' }] },
+  { id: 'offer-morning-bliss', title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop' },
+  { id: 'offer-sweet-tooth', title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop' },
+  { id: 'offer-chill-hour', title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop' },
 ]
+
+const offerConfig = {
+  'offer-morning-bliss': {
+    groups: [
+      { id: 'drink', label: 'Choose your drink', items: () => menuItems.filter(i => i.category === 'coffee') },
+      { id: 'pastry', label: 'Choose your pastry', items: () => menuItems.filter(i => i.id === 15) },
+    ],
+    calcPrice: (sel) => { const t = Object.values(sel).reduce((s, i) => s + i.priceNum, 0); return Math.round(t * 0.8 * 100) / 100 },
+    summary: (sel) => Object.values(sel).map(i => i.name).join(' + '),
+  },
+  'offer-sweet-tooth': {
+    groups: [
+      { id: 'pastry', label: 'Choose your pastry', items: () => menuItems.filter(i => i.category === 'desserts') },
+    ],
+    calcPrice: (sel) => sel.pastry.priceNum,
+    summary: (sel) => `${sel.pastry.name} × 2`,
+  },
+  'offer-chill-hour': {
+    groups: [
+      { id: 'drink', label: 'Choose your iced drink', items: () => menuItems.filter(i => i.category === 'cold') },
+    ],
+    calcPrice: (sel) => Math.max(0, sel.drink.priceNum - 1),
+    summary: (sel) => sel.drink.name,
+  },
+}
 
 const featuredDrinks = [
   { name: 'Signature Latte', desc: 'Espresso with steamed milk and a touch of vanilla', price: '$5.50', image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop' },
@@ -22,20 +49,98 @@ const testimonials = [
 ]
 
 function Home() {
+  const [configuringOffer, setConfiguringOffer] = useState(null)
+  const [selections, setSelections] = useState({})
   const { addItem } = useCart()
 
-  const addOfferToCart = (offer) => {
+  const openOfferConfig = (offer) => {
+    const config = offerConfig[offer.id]
+    const initial = {}
+    config.groups.forEach(g => { initial[g.id] = null })
+    setSelections(initial)
+    setConfiguringOffer(offer)
+  }
+
+  const selectOfferItem = (groupId, item) => {
+    setSelections(prev => ({ ...prev, [groupId]: item }))
+  }
+
+  const confirmOffer = () => {
+    if (!configuringOffer) return
+    const config = offerConfig[configuringOffer.id]
+    const allSelected = config.groups.every(g => selections[g.id])
+    if (!allSelected) return
+
+    const finalPrice = config.calcPrice(selections)
+    const summary = config.summary(selections)
+    const chosenItems = config.groups.map(g => selections[g.id])
+
     addItem({
-      id: offer.id,
-      name: offer.title,
-      priceNum: offer.priceNum,
-      price: `$${offer.priceNum.toFixed(2)}`,
-      image: offer.image,
+      id: configuringOffer.id + '-' + Date.now(),
+      name: configuringOffer.title,
+      priceNum: finalPrice,
+      price: `$${finalPrice.toFixed(2)}`,
+      image: configuringOffer.image,
       isOffer: true,
-      offerBadge: offer.badge,
-      offerValid: offer.valid,
-      offerItems: offer.items,
+      offerBadge: configuringOffer.badge,
+      offerValid: configuringOffer.valid,
+      offerItems: chosenItems,
+      offerSummary: summary,
     })
+    setConfiguringOffer(null)
+    setSelections({})
+  }
+
+  const cancelOffer = () => {
+    setConfiguringOffer(null)
+    setSelections({})
+  }
+
+  const renderOfferModal = () => {
+    if (!configuringOffer) return null
+    const config = offerConfig[configuringOffer.id]
+    const allSelected = config.groups.every(g => selections[g.id])
+    const previewPrice = allSelected ? config.calcPrice(selections) : null
+
+    return (
+      <div className="offer-modal-overlay" onClick={cancelOffer}>
+        <div className="offer-modal" onClick={e => e.stopPropagation()}>
+          <button className="offer-modal-close" onClick={cancelOffer}>✕</button>
+          <h3 className="offer-modal-title">{configuringOffer.title}</h3>
+          <p className="offer-modal-desc">{configuringOffer.desc}</p>
+          <span className="offer-modal-badge">{configuringOffer.badge}</span>
+          {config.groups.map(group => (
+            <div className="offer-modal-group" key={group.id}>
+              <h4 className="offer-group-label">{group.label}</h4>
+              <div className="offer-group-options">
+                {group.items().map(item => (
+                  <button key={item.id} className={`offer-option-card ${selections[group.id]?.id === item.id ? 'selected' : ''}`} onClick={() => selectOfferItem(group.id, item)}>
+                    <img src={item.image} alt={item.name} />
+                    <div className="offer-option-info">
+                      <strong>{item.name}</strong>
+                      <span>{item.price}</span>
+                    </div>
+                    {selections[group.id]?.id === item.id && <span className="offer-check">✓</span>}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+          {previewPrice !== null && (
+            <div className="offer-modal-total">
+              <span>Total</span>
+              <strong>${previewPrice.toFixed(2)}</strong>
+            </div>
+          )}
+          <div className="offer-modal-actions">
+            <button className="btn btn-outline" onClick={cancelOffer}>Cancel</button>
+            <button className="btn btn-primary" onClick={confirmOffer} disabled={!allSelected}>
+              {allSelected ? `Add to Cart — $${previewPrice.toFixed(2)}` : 'Select all options'}
+            </button>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -69,7 +174,7 @@ function Home() {
                   <h3>{offer.title}</h3>
                   <p className="offer-desc">{offer.desc}</p>
                   <span className="offer-valid">{offer.valid}</span>
-                  <button className="btn-offer" onClick={() => addOfferToCart(offer)}>Add to Cart — ${offer.priceNum.toFixed(2)}</button>
+                  <button className="btn-offer" onClick={() => openOfferConfig(offer)}>Customize & Add</button>
                 </div>
               </div>
             ))}
@@ -151,6 +256,7 @@ function Home() {
           </div>
         </div>
       </section>
+        {renderOfferModal()}
     </div>
   )
 }
