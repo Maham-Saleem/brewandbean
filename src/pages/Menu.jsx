@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import './Menu.css'
 
@@ -73,6 +74,12 @@ export const menuItems = [
   { id: 17, category: 'desserts', name: 'Chocolate Brownie', desc: 'Rich dark chocolate brownie with sea salt', price: '$5.50', priceNum: 5.50, rating: 4.7, featured: false, tags: ['Dessert'], image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&h=360&fit=crop' },
 ]
 
+const offers = [
+  { title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop' },
+  { title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop' },
+  { title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop' },
+]
+
 function Menu() {
   const [activeCategory, setActiveCategory] = useState('all')
   const { addItem } = useCart()
@@ -145,6 +152,28 @@ function Menu() {
           <span className="menu-hero-badge">Handcrafted with Love</span>
           <h1>Our Menu</h1>
           <p>Carefully crafted beverages and treats for every moment</p>
+        </div>
+      </section>
+
+      <section className="menu-section today-specials">
+        <div className="container">
+          <h2 className="specials-title fade-in">Today's Specials</h2>
+          <div className="specials-grid fade-in">
+            {offers.map((offer, i) => (
+              <div className="special-card" key={i}>
+                <div className="special-image">
+                  <img src={offer.image} alt={offer.title} loading="lazy" />
+                  <span className="special-badge">{offer.badge}</span>
+                </div>
+                <div className="special-body">
+                  <h3>{offer.title}</h3>
+                  <p className="special-desc">{offer.desc}</p>
+                  <span className="special-valid">{offer.valid}</span>
+                  <Link to="/menu" className="btn-special">Order Now</Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
