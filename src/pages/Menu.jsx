@@ -6,7 +6,7 @@ const categories = [
   { id: 'all', label: 'All Items' },
   { id: 'coffee', label: 'Coffee' },
   { id: 'tea', label: 'Tea' },
-  { id: 'cold', label: 'Cold Drinks' },
+  { id: 'cold', label: 'Iced Drinks' },
   { id: 'desserts', label: 'Desserts' },
 ]
 

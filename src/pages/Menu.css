@@ -73,8 +73,8 @@
 
 .category-link {
   font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--color-text-light);
   background: none;
   border: none;
@@ -329,10 +329,7 @@
     padding-top: 1rem;
   }
   .category-link {
-    font-size: 0.75rem;
-    padding: 0.3rem 0;
-  }
-  .category-link.active {
     font-size: 0.85rem;
+    padding: 0.3rem 0;
   }
 }
