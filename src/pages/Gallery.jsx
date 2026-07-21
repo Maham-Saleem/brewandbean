@@ -4,7 +4,7 @@ import './Gallery.css'
 const galleryImages = [
   { src: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&h=500&fit=crop', alt: 'Cozy cafe interior', category: 'interior' },
   { src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=500&fit=crop', alt: 'Coffee being poured', category: 'coffee' },
-  { src: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=600&h=500&fit=crop', alt: 'Latte art', category: 'coffee' },
+  { src: 'https://images.unsplash.com/photo-1512568400610-62d28a249f5a?w=600&h=500&fit=crop', alt: 'Latte art', category: 'coffee' },
   { src: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=500&fit=crop', alt: 'Pastry display', category: 'food' },
   { src: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=600&h=500&fit=crop', alt: 'Cafe ambiance', category: 'interior' },
   { src: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=500&fit=crop', alt: 'Pour over coffee', category: 'coffee' },
