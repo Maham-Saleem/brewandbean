@@ -26,7 +26,7 @@ const SVG_ICONS = {
 
 function Checkout() {
   const { cartItems, updateQuantity, removeItem, subtotal, clearCart } = useCart()
-  const { currentUser, login, signup, forgotPassword, addAddress, removeAddress, addOrder } = useAuth()
+  const { currentUser, login, signup, forgotPassword, addAddress, removeAddress, setDefaultAddress, addOrder } = useAuth()
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
 
@@ -40,7 +40,7 @@ function Checkout() {
   const [method, setMethod] = useState('pickup')
   const [selectedAddrId, setSelectedAddrId] = useState(null)
   const [showNewAddr, setShowNewAddr] = useState(false)
-  const [newAddr, setNewAddr] = useState({ label: '', street: '', city: '', zip: '', instructions: '' })
+  const [newAddr, setNewAddr] = useState({ label: '', street: '', city: '', zip: '', instructions: '', setAsDefault: false })
 
   /* ── Payment state ── */
   const [payment, setPayment] = useState('')
@@ -98,12 +98,16 @@ function Checkout() {
     e.preventDefault()
     if (!newAddr.street || !newAddr.city || !newAddr.zip) return
     const addr = addAddress({
-      label: newAddr.label || `${newAddr.street}, ${newAddr.city}`,
-      ...newAddr,
+      label: `${newAddr.street}, ${newAddr.city}`,
+      street: newAddr.street,
+      city: newAddr.city,
+      zip: newAddr.zip,
+      instructions: newAddr.instructions,
     })
+    if (newAddr.setAsDefault) setDefaultAddress(addr.id)
     setSelectedAddrId(addr.id)
     setShowNewAddr(false)
-    setNewAddr({ label: '', street: '', city: '', zip: '', instructions: '' })
+    setNewAddr({ label: '', street: '', city: '', zip: '', instructions: '', setAsDefault: false })
   }
 
   const handleSelectAddress = (id) => {
@@ -326,9 +330,12 @@ function Checkout() {
 
         {showNewAddr && (
           <form className="co-form" onSubmit={handleAddAddress}>
-            <div className="co-fg">
-              <label>Label <span className="co-optional">(optional)</span></label>
-              <input type="text" name="label" value={newAddr.label} onChange={updateField(newAddr, setNewAddr)} placeholder="Home, Work, etc." />
+            <div className="co-profile-banner">
+              <div className="co-profile-banner-avatar">{currentUser?.name ? currentUser.name.charAt(0).toUpperCase() : currentUser?.email?.charAt(0).toUpperCase()}</div>
+              <div className="co-profile-banner-info">
+                <strong>{currentUser?.name || 'User'}</strong>
+                <span>{currentUser?.phone || 'No phone on file'} · {currentUser?.email}</span>
+              </div>
             </div>
             <div className="co-fg">
               <label>Street Address</label>
@@ -348,6 +355,10 @@ function Checkout() {
               <label>Delivery Instructions <span className="co-optional">(optional)</span></label>
               <textarea name="instructions" value={newAddr.instructions} onChange={updateField(newAddr, setNewAddr)} rows={2} placeholder="Gate code, landmark, etc." />
             </div>
+            <label className="co-checkbox">
+              <input type="checkbox" checked={newAddr.setAsDefault} onChange={e => setNewAddr({ ...newAddr, setAsDefault: e.target.checked })} />
+              <span>Set as default address</span>
+            </label>
             <button type="submit" className="btn btn-primary">Save Address</button>
           </form>
         )}

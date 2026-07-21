@@ -28,11 +28,13 @@ const TABS = [
 ]
 
 function Account() {
-  const { currentUser, logout, removeAddress, updateAddress, setDefaultAddress } = useAuth()
+  const { currentUser, logout, removeAddress, updateAddress, addAddress, setDefaultAddress } = useAuth()
   const navigate = useNavigate()
   const [tab, setTab] = useState('Dashboard')
   const [editingAddr, setEditingAddr] = useState(null)
   const [editForm, setEditForm] = useState({ label: '', street: '', city: '', zip: '', instructions: '' })
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [newAddrForm, setNewAddrForm] = useState({ street: '', city: '', zip: '', instructions: '', setAsDefault: false })
 
   if (!currentUser) {
     return (
@@ -85,6 +87,22 @@ function Account() {
     if (!editForm.street || !editForm.city || !editForm.zip) return
     updateAddress(id, { ...editForm, label: editForm.label || `${editForm.street}, ${editForm.city}` })
     cancelEdit()
+  }
+
+  /* ── Add address modal ── */
+  const openAddModal = () => { setNewAddrForm({ street: '', city: '', zip: '', instructions: '', setAsDefault: false }); setShowAddModal(true) }
+  const closeAddModal = () => setShowAddModal(false)
+  const handleSaveNewAddress = () => {
+    if (!newAddrForm.street || !newAddrForm.city || !newAddrForm.zip) return
+    const addr = addAddress({
+      label: `${newAddrForm.street}, ${newAddrForm.city}`,
+      street: newAddrForm.street,
+      city: newAddrForm.city,
+      zip: newAddrForm.zip,
+      instructions: newAddrForm.instructions,
+    })
+    if (newAddrForm.setAsDefault) setDefaultAddress(addr.id)
+    closeAddModal()
   }
 
   /* ── Renderers ── */
@@ -258,10 +276,12 @@ function Account() {
           <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <p>You don't have any saved addresses yet.</p>
           <span className="ac-empty-hint">Add one during checkout or contact us to set one up.</span>
-          <button className="btn btn-primary" onClick={() => navigate('/checkout')}>Add Address</button>
+          <button className="btn btn-primary" onClick={openAddModal}>Add Address</button>
         </div>
       ) : (
-        <div className="ac-addresses-list">
+        <>
+          <button className="ac-add-addr-btn" onClick={openAddModal}>{I.plus} Add Address</button>
+          <div className="ac-addresses-list">
           {addresses.map(addr => (
             <div className={`ac-addr-card ${defaultAddrId === addr.id ? 'default' : ''}`} key={addr.id}>
               {editingAddr === addr.id ? (
@@ -307,9 +327,63 @@ function Account() {
             </div>
           ))}
         </div>
+        </>
       )}
     </div>
   )
+
+  const renderAddAddressModal = () => {
+    if (!showAddModal) return null
+    const canSave = newAddrForm.street && newAddrForm.city && newAddrForm.zip
+    return (
+      <div className="ac-modal-overlay" onClick={closeAddModal}>
+        <div className="ac-modal" onClick={e => e.stopPropagation()}>
+          <button className="ac-modal-close" onClick={closeAddModal}>✕</button>
+          <h2 className="ac-card-title">Add New Address</h2>
+
+          {/* Read-only profile info */}
+          <div className="ac-modal-profile">
+            <div className="ac-modal-profile-avatar">{currentUser.name ? currentUser.name.charAt(0).toUpperCase() : currentUser.email.charAt(0).toUpperCase()}</div>
+            <div className="ac-modal-profile-info">
+              <strong>{currentUser.name || 'User'}</strong>
+              <span>{currentUser.phone || 'No phone on file'} · {currentUser.email}</span>
+            </div>
+            <button className="ac-modal-edit-link" onClick={() => { closeAddModal(); setTab('Profile') }}>Edit Profile</button>
+          </div>
+
+          <div className="ac-modal-form">
+            <div className="ac-mf-row">
+              <label>Street Address</label>
+              <input type="text" value={newAddrForm.street} onChange={e => setNewAddrForm({ ...newAddrForm, street: e.target.value })} placeholder="123 Coffee Lane" required />
+            </div>
+            <div className="ac-mf-half">
+              <div className="ac-mf-row">
+                <label>City</label>
+                <input type="text" value={newAddrForm.city} onChange={e => setNewAddrForm({ ...newAddrForm, city: e.target.value })} placeholder="Bean City" required />
+              </div>
+              <div className="ac-mf-row">
+                <label>Postal Code</label>
+                <input type="text" value={newAddrForm.zip} onChange={e => setNewAddrForm({ ...newAddrForm, zip: e.target.value })} placeholder="12345" required />
+              </div>
+            </div>
+            <div className="ac-mf-row">
+              <label>Delivery Instructions <span className="co-optional">(optional)</span></label>
+              <textarea value={newAddrForm.instructions} onChange={e => setNewAddrForm({ ...newAddrForm, instructions: e.target.value })} rows={2} placeholder="Gate code, landmark, etc." />
+            </div>
+            <label className="ac-mf-checkbox">
+              <input type="checkbox" checked={newAddrForm.setAsDefault} onChange={e => setNewAddrForm({ ...newAddrForm, setAsDefault: e.target.checked })} />
+              <span>Set as default address</span>
+            </label>
+          </div>
+
+          <div className="ac-modal-actions">
+            <button className="btn btn-outline" onClick={closeAddModal}>Cancel</button>
+            <button className="btn btn-primary" onClick={handleSaveNewAddress} disabled={!canSave}>Save Address</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const renderLogout = () => (
     <div className="ac-card ac-logout-card fade-in">
@@ -363,6 +437,7 @@ function Account() {
           </div>
         </div>
       </section>
+      {renderAddAddressModal()}
     </div>
   )
 }

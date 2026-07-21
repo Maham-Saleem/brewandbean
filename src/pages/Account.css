@@ -731,6 +731,231 @@
   padding: 0.5rem 1.2rem !important;
 }
 
+/* ── Add Address Button ── */
+
+.ac-add-addr-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border: 1.5px dashed var(--color-border);
+  border-radius: 8px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.ac-add-addr-btn:hover {
+  border-color: var(--color-accent);
+  background: rgba(196, 149, 106, 0.05);
+  color: var(--color-secondary);
+}
+
+.ac-add-addr-btn svg {
+  flex-shrink: 0;
+}
+
+/* ── Add Address Modal ── */
+
+.ac-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 24, 16, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.ac-modal {
+  background: var(--color-white);
+  border-radius: 16px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(44, 24, 16, 0.2);
+  animation: fadeIn 0.25s ease;
+}
+
+.ac-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--color-text-light);
+  padding: 4px;
+  line-height: 1;
+}
+
+.ac-modal-close:hover {
+  color: var(--color-primary);
+}
+
+.ac-modal .ac-card-title {
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+}
+
+/* Profile banner in modal */
+
+.ac-modal-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-light);
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.ac-modal-profile-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.ac-modal-profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ac-modal-profile-info strong {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ac-modal-profile-info span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-text-light);
+}
+
+.ac-modal-edit-link {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ac-modal-edit-link:hover {
+  color: var(--color-secondary);
+}
+
+/* Form in modal */
+
+.ac-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.ac-mf-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ac-mf-row label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ac-mf-row input,
+.ac-mf-row textarea {
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-white);
+  color: var(--color-text);
+  outline: none;
+  transition: var(--transition);
+}
+
+.ac-mf-row input:focus,
+.ac-mf-row textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(196, 149, 106, 0.12);
+}
+
+.ac-mf-row textarea {
+  resize: vertical;
+  min-height: 52px;
+}
+
+.ac-mf-half {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.ac-mf-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.ac-mf-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.ac-modal-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.ac-modal-actions .btn {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  font-size: 0.85rem;
+}
+
+.ac-modal-actions .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 1024px) {

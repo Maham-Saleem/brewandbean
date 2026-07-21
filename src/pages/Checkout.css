@@ -282,6 +282,69 @@
   box-shadow: none;
 }
 
+/* ── Profile Banner (Checkout Add Address) ── */
+
+.co-profile-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--color-light);
+  border-radius: 8px;
+}
+
+.co-profile-banner-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.co-profile-banner-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.co-profile-banner-info strong {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.co-profile-banner-info span {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-text-light);
+}
+
+/* ── Checkbox ── */
+
+.co-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.co-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
 /* ── Delivery Method ── */
 
 .co-delivery-options {
