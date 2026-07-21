@@ -3,11 +3,11 @@ import { useCart } from '../context/CartContext'
 import './Menu.css'
 
 const categories = [
-  { id: 'all', label: 'All Items', icon: '📋' },
-  { id: 'coffee', label: 'Coffee', icon: '☕' },
-  { id: 'tea', label: 'Tea', icon: '🍵' },
-  { id: 'cold', label: 'Cold Drinks', icon: '🧊' },
-  { id: 'desserts', label: 'Desserts', icon: '🍰' },
+  { id: 'all', label: 'All Items' },
+  { id: 'coffee', label: 'Coffee' },
+  { id: 'tea', label: 'Tea' },
+  { id: 'cold', label: 'Cold Drinks' },
+  { id: 'desserts', label: 'Desserts' },
 ]
 
 export const menuItems = [
@@ -106,23 +106,16 @@ function Menu() {
 
       <section className="menu-section menu-section-alt">
         <div className="container">
-          <div className="category-panel fade-in">
-            <div className="category-panel-header">
-              <h2>Browse by Category</h2>
-              <p>Explore our full selection of handcrafted drinks and treats</p>
-            </div>
-            <div className="category-filters">
-              {categories.map(cat => (
-                <button
-                  key={cat.id}
-                  className={`category-btn ${activeCategory === cat.id ? 'active' : ''}`}
-                  onClick={() => setActiveCategory(cat.id)}
-                >
-                  <span className="category-btn-icon">{cat.icon}</span>
-                  <span className="category-btn-label">{cat.label}</span>
-                </button>
-              ))}
-            </div>
+          <div className="category-nav fade-in">
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                className={`category-link ${activeCategory === cat.id ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat.id)}
+              >
+                {cat.label}
+              </button>
+            ))}
           </div>
 
           <div className="menu-grid fade-in">
