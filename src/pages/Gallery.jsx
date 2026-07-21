@@ -8,7 +8,7 @@ const galleryImages = [
   { src: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=500&fit=crop', alt: 'Pastry display', category: 'food' },
   { src: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=600&h=500&fit=crop', alt: 'Cafe ambiance', category: 'interior' },
   { src: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=500&fit=crop', alt: 'Pour over coffee', category: 'coffee' },
-  { src: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=600&h=500&fit=crop', alt: 'Coffee beans', category: 'coffee' },
+  { src: 'https://images.unsplash.com/photo-1554646533-de2d01895a23?w=600&h=500&fit=crop', alt: 'Coffee beans', category: 'coffee' },
   { src: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&h=500&fit=crop', alt: 'Dessert selection', category: 'food' },
   { src: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&h=500&fit=crop', alt: 'Coffee roasting', category: 'coffee' },
   { src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&h=500&fit=crop', alt: 'Cafe exterior', category: 'interior' },
