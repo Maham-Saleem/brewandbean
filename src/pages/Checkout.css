@@ -524,7 +524,7 @@
 
 .co-qty-btn:hover:not(:disabled) {
   border-color: var(--color-accent);
-  background: var(--color-cream);
+  background: var(--color-white);
 }
 
 .co-qty-btn:disabled {

@@ -148,7 +148,7 @@
 
 .cart-qty button:hover:not(:disabled) {
   border-color: var(--color-accent);
-  background: var(--color-cream);
+  background: var(--color-white);
 }
 
 .cart-qty button:disabled {
