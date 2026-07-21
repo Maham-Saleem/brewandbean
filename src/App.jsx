@@ -11,6 +11,8 @@ import Contact from './pages/Contact'
 import Checkout from './pages/Checkout'
 import Account from './pages/Account'
 
+import Login from './pages/Login'
+
 function App() {
   return (
     <AuthProvider>
@@ -26,6 +28,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </main>
           <Footer />

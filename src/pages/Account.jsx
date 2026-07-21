@@ -44,7 +44,7 @@ function Account() {
             <div className="ac-empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
             <h2>Not signed in</h2>
             <p>Please sign in to view your account.</p>
-            <button className="btn btn-primary" onClick={() => navigate('/checkout')}>Sign In</button>
+            <button className="btn btn-primary" onClick={() => navigate('/login')}>Sign In</button>
           </div>
         </section>
       </div>
