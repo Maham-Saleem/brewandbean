@@ -91,6 +91,18 @@ function Menu() {
 
       <section className="menu-section">
         <div className="container">
+          <div className="category-nav fade-in">
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                className={`category-link ${activeCategory === cat.id ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat.id)}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
           <div className="featured-section fade-in">
             <div className="featured-header">
               <span className="featured-icon">✦</span>
@@ -106,18 +118,6 @@ function Menu() {
 
       <section className="menu-section menu-section-alt">
         <div className="container">
-          <div className="category-nav fade-in">
-            {categories.map(cat => (
-              <button
-                key={cat.id}
-                className={`category-link ${activeCategory === cat.id ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat.id)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
           <div className="menu-grid fade-in">
             {filteredItems.map(item => renderItem(item))}
           </div>

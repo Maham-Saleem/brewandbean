@@ -18,7 +18,7 @@ function Navbar() {
         <div className="container navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMenu}>
             <span className="logo-icon">☕</span>
-            <span className="logo-text">Brew &<span className="logo-highlight">Bean</span></span>
+            <span className="logo-text">Brew & Bean</span>
           </Link>
 
           <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
