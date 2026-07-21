@@ -335,29 +335,7 @@ function Menu() {
         </div>
       </section>
 
-      <section className="menu-section today-specials">
-        <div className="container">
-          <h2 className="specials-title fade-in">Today's Specials</h2>
-          <div className="specials-grid fade-in">
-            {offers.map((offer, i) => (
-              <div className="special-card" key={i}>
-                <div className="special-image">
-                  <img src={offer.image} alt={offer.title} loading="lazy" />
-                  <span className="special-badge">{offer.badge}</span>
-                </div>
-                <div className="special-body">
-                  <h3>{offer.title}</h3>
-                  <p className="special-desc">{offer.desc}</p>
-                  <span className="special-valid">{offer.valid}</span>
-                  <button className="btn-special" onClick={() => openOfferConfig(offer)}>Customize & Add</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="menu-section">
+      <section className="menu-section menu-nav-section">
         <div className="container">
           <div className="category-pills fade-in">
             {categories.map(cat => (
@@ -371,53 +349,79 @@ function Menu() {
               </button>
             ))}
           </div>
-
-          {activeCategory === 'all' && (
-            <div className="featured-section">
-              <div className="section-heading-row">
-                <h2>✦ Barista's Favorites</h2>
-                <p>Handpicked favorites, loved by our customers</p>
-              </div>
-              <div className="featured-grid fade-in">
-                {featuredItems.map(item => renderFeaturedCard(item))}
-              </div>
-            </div>
-          )}
         </div>
       </section>
 
-      {activeCategory === 'all' ? (
-        Object.keys(categoryMeta).map(catId => {
-          const cat = categories.find(c => c.id === catId)
-          const meta = categoryMeta[catId]
-          const items = menuItems.filter(item => item.category === catId)
-          if (!items.length) return null
-          return (
-            <section className="menu-section category-section" key={catId}>
-              <div className="container">
-                <div className="section-header fade-in">
-                  <div className="section-header-left">
-                    <meta.Icon />
-                    <h2>{cat.label}</h2>
+      {activeCategory === 'all' && (
+        <>
+          <section className="menu-section today-specials">
+            <div className="container">
+              <h2 className="specials-title fade-in">Today's Specials</h2>
+              <div className="specials-grid fade-in">
+                {offers.map((offer, i) => (
+                  <div className="special-card" key={i}>
+                    <div className="special-image">
+                      <img src={offer.image} alt={offer.title} loading="lazy" />
+                      <span className="special-badge">{offer.badge}</span>
+                    </div>
+                    <div className="special-body">
+                      <h3>{offer.title}</h3>
+                      <p className="special-desc">{offer.desc}</p>
+                      <span className="special-valid">{offer.valid}</span>
+                      <button className="btn-special" onClick={() => openOfferConfig(offer)}>Customize & Add</button>
+                    </div>
                   </div>
-                  <p className="section-header-desc">{meta.desc}</p>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="menu-section">
+            <div className="container">
+              <div className="featured-section">
+                <div className="section-heading-row">
+                  <h2>✦ Barista's Favorites</h2>
+                  <p>Handpicked favorites, loved by our customers</p>
                 </div>
-                <div className="menu-grid fade-in">
-                  {items.map(item => renderMenuCard(item))}
+                <div className="featured-grid fade-in">
+                  {featuredItems.map(item => renderFeaturedCard(item))}
                 </div>
               </div>
-            </section>
-          )
-        })
-      ) : (
-        <section className="menu-section category-section">
-          <div className="container">
-            {(() => {
+            </div>
+          </section>
+        </>
+      )}
+
+      <section className="menu-section">
+        <div className="container">
+          {activeCategory === 'all' ? (
+            Object.keys(categoryMeta).map(catId => {
+              const cat = categories.find(c => c.id === catId)
+              const meta = categoryMeta[catId]
+              const items = menuItems.filter(item => item.category === catId)
+              if (!items.length) return null
+              return (
+                <div className="category-section" key={catId}>
+                  <div className="section-header fade-in">
+                    <div className="section-header-left">
+                      <meta.Icon />
+                      <h2>{cat.label}</h2>
+                    </div>
+                    <p className="section-header-desc">{meta.desc}</p>
+                  </div>
+                  <div className="menu-grid fade-in">
+                    {items.map(item => renderMenuCard(item))}
+                  </div>
+                </div>
+              )
+            })
+          ) : (
+            (() => {
               const cat = categories.find(c => c.id === activeCategory)
               const meta = categoryMeta[activeCategory]
               return (
                 <>
-                   <div className="section-header fade-in">
+                  <div className="section-header fade-in">
                     <div className="section-header-left">
                       <meta.Icon />
                       <h2>{cat.label}</h2>
@@ -429,10 +433,10 @@ function Menu() {
                   </div>
                 </>
               )
-            })()}
-          </div>
-        </section>
-      )}
+            })()
+          )}
+        </div>
+      </section>
         {renderOfferModal()}
     </div>
   )

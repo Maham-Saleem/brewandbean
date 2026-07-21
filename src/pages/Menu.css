@@ -20,13 +20,17 @@
   padding: 3.5rem 0;
 }
 
+.menu-nav-section {
+  padding: 1.5rem 0 0.5rem;
+}
+
 /* ── Category Pills ── */
 
 .category-pills {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
   padding: 0.5rem;
   background: var(--color-surface);
   border-radius: 50px;
@@ -384,6 +388,9 @@
   .menu-section {
     padding: 2.5rem 0;
   }
+  .menu-nav-section {
+    padding: 1rem 0 0.25rem;
+  }
   .category-pills {
     gap: 0.35rem;
     padding: 0.4rem;
@@ -480,6 +487,9 @@
   .page-hero p {
     font-size: 0.95rem;
   }
+  .menu-nav-section {
+    padding: 0.75rem 0 0;
+  }
   .section-heading-row h2 {
     font-size: 1.1rem;
   }
@@ -557,7 +567,7 @@
 /* ── Today's Specials ── */
 
 .today-specials {
-  padding-top: 2rem;
+  padding-top: 0.5rem;
 }
 
 .specials-title {
