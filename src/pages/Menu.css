@@ -692,20 +692,43 @@
 
 .offer-modal-total {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.4rem;
   padding: 1rem 0;
   border-top: 1px solid var(--color-border);
   margin-top: 0.5rem;
   font-size: 1rem;
 }
 
-.offer-modal-total span {
+.offer-total-breakdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.offer-original-price {
+  text-decoration: line-through;
+  color: var(--color-text-muted, #999);
+}
+
+.offer-discount-amount {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.offer-modal-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offer-modal-total-row span {
   font-weight: 500;
   color: var(--color-text);
 }
 
-.offer-modal-total strong {
+.offer-modal-total-row strong {
   font-family: var(--font-serif);
   font-size: 1.15rem;
   color: var(--color-primary);

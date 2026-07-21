@@ -378,12 +378,18 @@ function Checkout() {
       <p className="co-subtitle">Adjust quantities or remove items before proceeding.</p>
       <div className="co-review-items">
         {cartItems.map(item => (
-          <div className="co-review-item" key={item.id}>
-            <img src={item.image} alt={item.name} />
-            <div className="co-review-info">
-              <h4>{item.name}</h4>
-              {item.isOffer && <span className="co-offer-badge">Today's Special</span>}
-              <span className="co-unit-price">${item.priceNum.toFixed(2)} each</span>
+            <div className="co-review-item" key={item.id}>
+              <img src={item.image} alt={item.name} />
+              <div className="co-review-info">
+                <h4>{item.name}</h4>
+                {item.isOffer && <span className="co-offer-badge">{item.offerBadge || "Today's Special"}</span>}
+                {item.discountAmount > 0 && (
+                  <div className="co-discount-info">
+                    <span className="co-original-price">${((item.originalPriceNum || item.priceNum) * item.quantity).toFixed(2)}</span>
+                    <span className="co-save-amount">Save ${(item.discountAmount * item.quantity).toFixed(2)}</span>
+                  </div>
+                )}
+                <span className="co-unit-price">${item.priceNum.toFixed(2)} each</span>
             </div>
             <div className="co-review-qty">
               <button className="co-qty-btn" onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>−</button>
@@ -492,15 +498,18 @@ function Checkout() {
         <div className="co-card fade-in">
           <h2 className="co-title">Order Summary</h2>
           <p className="co-subtitle">Please review before placing your order.</p>
-          <div className="co-summary-card">
-            <h3>Items</h3>
-            {cartItems.map(item => (
-              <div className="co-summary-line" key={item.id}>
-                <span>{item.name} × {item.quantity}</span>
-                <strong>${(item.priceNum * item.quantity).toFixed(2)}</strong>
-              </div>
-            ))}
-          </div>
+            <div className="co-summary-card">
+              <h3>Items</h3>
+              {cartItems.map(item => (
+                <div className="co-summary-line" key={item.id}>
+                  <span>
+                    {item.name} × {item.quantity}
+                    {item.isOffer && <span className="co-offer-inline"> {item.offerBadge}</span>}
+                  </span>
+                  <strong>${(item.priceNum * item.quantity).toFixed(2)}</strong>
+                </div>
+              ))}
+            </div>
           <div className="co-summary-card">
             <h3>Details</h3>
             <div className="co-summary-line"><span>Contact</span><strong>{currentUser?.name || currentUser?.email}</strong></div>

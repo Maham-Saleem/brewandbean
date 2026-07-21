@@ -562,6 +562,35 @@
   margin-bottom: 0.1rem;
 }
 
+.co-discount-info {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  margin-top: 0.1rem;
+}
+
+.co-original-price {
+  text-decoration: line-through;
+  color: var(--color-text-muted, #999);
+}
+
+.co-save-amount {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.co-offer-inline {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(196, 149, 106, 0.1);
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+  margin-left: 0.25rem;
+  text-transform: uppercase;
+}
+
 .co-review-qty {
   display: flex;
   align-items: center;

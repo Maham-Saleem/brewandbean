@@ -85,6 +85,7 @@ const offerConfig = {
       { id: 'drink', label: 'Choose your drink', items: () => menuItems.filter(i => i.category === 'coffee') },
       { id: 'pastry', label: 'Choose your pastry', items: () => menuItems.filter(i => i.id === 15) },
     ],
+    calcOriginalPrice: (sel) => Object.values(sel).reduce((s, i) => s + i.priceNum, 0),
     calcPrice: (sel) => {
       const total = Object.values(sel).reduce((s, i) => s + i.priceNum, 0)
       return Math.round(total * 0.8 * 100) / 100
@@ -95,6 +96,7 @@ const offerConfig = {
     groups: [
       { id: 'pastry', label: 'Choose your pastry', items: () => menuItems.filter(i => i.category === 'desserts') },
     ],
+    calcOriginalPrice: (sel) => sel.pastry.priceNum * 2,
     calcPrice: (sel) => sel.pastry.priceNum,
     summary: (sel) => `${sel.pastry.name} × 2`,
   },
@@ -102,6 +104,7 @@ const offerConfig = {
     groups: [
       { id: 'drink', label: 'Choose your iced drink', items: () => menuItems.filter(i => i.category === 'cold') },
     ],
+    calcOriginalPrice: (sel) => sel.drink.priceNum,
     calcPrice: (sel) => Math.max(0, sel.drink.priceNum - 1),
     summary: (sel) => sel.drink.name,
   },
@@ -133,7 +136,9 @@ function Menu() {
     const allSelected = config.groups.every(g => selections[g.id])
     if (!allSelected) return
 
+    const originalPriceNum = config.calcOriginalPrice ? config.calcOriginalPrice(selections) : config.calcPrice(selections)
     const finalPrice = config.calcPrice(selections)
+    const discountAmount = originalPriceNum - finalPrice
     const summary = config.summary(selections)
     const chosenItems = config.groups.map(g => selections[g.id])
 
@@ -142,6 +147,8 @@ function Menu() {
       name: configuringOffer.title,
       priceNum: finalPrice,
       price: `$${finalPrice.toFixed(2)}`,
+      originalPriceNum,
+      discountAmount,
       image: configuringOffer.image,
       isOffer: true,
       offerBadge: configuringOffer.badge,
@@ -162,7 +169,9 @@ function Menu() {
     if (!configuringOffer) return null
     const config = offerConfig[configuringOffer.id]
     const allSelected = config.groups.every(g => selections[g.id])
+    const originalPriceNum = allSelected && config.calcOriginalPrice ? config.calcOriginalPrice(selections) : null
     const previewPrice = allSelected ? config.calcPrice(selections) : null
+    const hasDiscount = originalPriceNum !== null && previewPrice !== null && originalPriceNum !== previewPrice
 
     return (
       <div className="offer-modal-overlay" onClick={cancelOffer}>
@@ -196,8 +205,16 @@ function Menu() {
 
           {previewPrice !== null && (
             <div className="offer-modal-total">
-              <span>Total</span>
-              <strong>${previewPrice.toFixed(2)}</strong>
+              {hasDiscount && (
+                <div className="offer-total-breakdown">
+                  <span className="offer-original-price">${originalPriceNum.toFixed(2)}</span>
+                  <span className="offer-discount-amount">−${(originalPriceNum - previewPrice).toFixed(2)}</span>
+                </div>
+              )}
+              <div className="offer-modal-total-row">
+                <span>Total</span>
+                <strong>${previewPrice.toFixed(2)}</strong>
+              </div>
             </div>
           )}
 

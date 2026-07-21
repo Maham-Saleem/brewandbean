@@ -247,7 +247,11 @@ function Account() {
                       <img src={item.image} alt={item.name} />
                       <div className="ac-order-item-info">
                         <strong>{item.name}</strong>
+                        {item.isOffer && <span className="ac-order-offer">{item.offerBadge || 'Special'}</span>}
                         <span>Qty: {item.quantity}</span>
+                        {item.discountAmount > 0 && (
+                          <span className="ac-order-discount-label">Saved ${(item.discountAmount * item.quantity).toFixed(2)}</span>
+                        )}
                       </div>
                       <span className="ac-order-item-price">${(item.priceNum * item.quantity).toFixed(2)}</span>
                     </div>

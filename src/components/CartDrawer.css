@@ -213,6 +213,24 @@
   margin-bottom: 0.15rem;
 }
 
+.cart-discount-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  margin-top: 0.1rem;
+}
+
+.cart-original-price {
+  text-decoration: line-through;
+  color: var(--color-text-muted, #999);
+}
+
+.cart-save-amount {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
 @media (max-width: 480px) {
   .cart-drawer {
     width: 100vw;

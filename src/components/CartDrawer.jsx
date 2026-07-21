@@ -34,7 +34,13 @@ function CartDrawer({ isOpen, onClose }) {
                   <img src={item.image} alt={item.name} />
                   <div className="cart-item-details">
                     <h4>{item.name}</h4>
-                    {item.isOffer && <span className="cart-offer-badge">Today's Special</span>}
+                    {item.isOffer && <span className="cart-offer-badge">{item.offerBadge || "Today's Special"}</span>}
+                    {item.discountAmount > 0 && (
+                      <div className="cart-discount-info">
+                        <span className="cart-original-price">${((item.originalPriceNum || item.priceNum) * item.quantity).toFixed(2)}</span>
+                        <span className="cart-save-amount">Save ${(item.discountAmount * item.quantity).toFixed(2)}</span>
+                      </div>
+                    )}
                     <span className="cart-item-price">${(item.priceNum * item.quantity).toFixed(2)}</span>
                     <div className="cart-qty">
                       <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>−</button>

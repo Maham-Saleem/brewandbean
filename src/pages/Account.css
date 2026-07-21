@@ -509,6 +509,27 @@
   color: var(--color-text-light);
 }
 
+.ac-order-offer {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(196, 149, 106, 0.12);
+  padding: 0.08rem 0.4rem;
+  border-radius: 3px;
+  margin-top: 0.1rem;
+}
+
+.ac-order-discount-label {
+  display: inline-block;
+  color: #2e7d32 !important;
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  margin-top: 0.1rem;
+}
+
 .ac-order-item-price {
   font-family: var(--font-serif);
   font-size: 0.82rem;
