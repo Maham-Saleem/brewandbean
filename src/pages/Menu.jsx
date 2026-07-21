@@ -376,7 +376,7 @@ function Menu() {
             </div>
           </section>
 
-          <section className="menu-section">
+      <section className="menu-section">
             <div className="container">
               <div className="featured-section">
                 <div className="section-heading-row">
@@ -392,7 +392,7 @@ function Menu() {
         </>
       )}
 
-      <section className="menu-section">
+      <section className="menu-section menu-section--categories">
         <div className="container">
           {activeCategory === 'all' ? (
             Object.keys(categoryMeta).map(catId => {

@@ -358,9 +358,14 @@
 }
 
 .section-header h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 800;
   color: var(--color-primary);
+}
+
+/* reduce gap between Barista's Favorites and first category */
+.menu-section--categories {
+  padding-top: 1rem;
 }
 
 .section-header-desc {
