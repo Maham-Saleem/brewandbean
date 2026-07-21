@@ -329,10 +329,14 @@
 
 .category-section {
   border-top: 1px solid var(--color-border);
+  padding-top: 2.5rem;
+  margin-top: 1rem;
 }
 
 .category-section:first-of-type {
   border-top: none;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .section-header {
