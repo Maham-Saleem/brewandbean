@@ -151,6 +151,7 @@ function Checkout() {
       status: 'confirmed',
       estimatedTime: method === 'pickup' ? PICKUP_INFO.prepTime : '30–45 minutes',
     })
+    clearCart()
     setStep(5)
   }
 
