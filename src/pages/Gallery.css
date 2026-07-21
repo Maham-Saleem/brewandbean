@@ -90,4 +90,13 @@
   .gallery-grid {
     grid-template-columns: 1fr;
   }
+  .gallery-filters {
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .gallery-filter-btn {
+    padding: 0.45rem 1rem;
+    font-size: 0.82rem;
+    min-height: 40px;
+  }
 }

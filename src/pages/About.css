@@ -158,17 +158,71 @@
 }
 
 @media (max-width: 768px) {
+  .page-hero {
+    padding: 6rem 0 3.5rem;
+  }
   .page-hero h1 {
     font-size: 2.5rem;
+  }
+  .page-hero p {
+    font-size: 1rem;
   }
   .story-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .story-text h2 {
+    font-size: 1.7rem;
   }
   .values-grid {
     grid-template-columns: 1fr;
   }
   .team-grid {
     grid-template-columns: 1fr;
+  }
+  .team-image {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-hero {
+    padding: 5rem 0 2.5rem;
+  }
+  .page-hero h1 {
+    font-size: 2rem;
+  }
+  .page-hero p {
+    font-size: 0.9rem;
+  }
+  .story-text h2 {
+    font-size: 1.4rem;
+  }
+  .story-text p {
+    font-size: 0.88rem;
+  }
+  .story-label {
+    font-size: 0.75rem;
+  }
+  .value-card {
+    padding: 1.5rem;
+  }
+  .value-card h3 {
+    font-size: 1.05rem;
+  }
+  .value-card p {
+    font-size: 0.88rem;
+  }
+  .value-number {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .team-image {
+    width: 130px;
+    height: 130px;
+  }
+  .team-card h3 {
+    font-size: 1rem;
   }
 }

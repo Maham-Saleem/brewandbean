@@ -132,8 +132,8 @@
 }
 
 .cart-qty button {
-  width: 26px;
-  height: 26px;
+  width: 36px;
+  height: 36px;
   border: 1px solid var(--color-border);
   background: var(--color-cream);
   border-radius: 4px;
@@ -157,7 +157,7 @@
 }
 
 .cart-qty span {
-  min-width: 20px;
+  min-width: 24px;
   text-align: center;
   font-size: 0.9rem;
   font-weight: 500;
@@ -169,8 +169,13 @@
   font-size: 0.85rem;
   color: #bdbdbd;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
   transition: var(--transition);
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cart-item-remove:hover {

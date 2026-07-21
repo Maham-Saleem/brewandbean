@@ -421,14 +421,26 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: 80vh;
+  }
+  .hero-content {
+    padding: 2rem 1.5rem;
+    max-width: 90%;
+  }
   .hero-title {
     font-size: 2.8rem;
   }
   .hero-subtitle {
     font-size: 1.1rem;
   }
+  .hero-desc {
+    font-size: 0.95rem;
+  }
   .drinks-grid {
     grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
   }
   .offers-grid {
     grid-template-columns: 1fr;
@@ -443,15 +455,114 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .ambiance-content h2 {
+    font-size: 1.7rem;
+  }
   .testimonials-grid {
     grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
   }
   .hero-actions, .cta-actions {
     flex-direction: column;
     align-items: center;
   }
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 280px;
+  }
   .cta-content h2 {
     font-size: 1.8rem;
+  }
+  .cta-content p {
+    font-size: 0.95rem;
+  }
+  .drink-image {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 70vh;
+  }
+  .hero-content {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .hero-desc {
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-actions .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.88rem;
+  }
+  .offers-grid {
+    max-width: 100%;
+  }
+  .offer-image {
+    height: 140px;
+  }
+  .offer-body {
+    padding: 0.85rem 0.9rem 0.95rem;
+  }
+  .offer-body h3 {
+    font-size: 0.92rem;
+  }
+  .offer-desc {
+    font-size: 0.78rem;
+  }
+  .drink-image {
+    height: 160px;
+  }
+  .drink-info {
+    padding: 1rem;
+  }
+  .drink-info h3 {
+    font-size: 1.05rem;
+  }
+  .ambiance-content h2 {
+    font-size: 1.4rem;
+  }
+  .ambiance-content > p {
+    font-size: 0.9rem;
+  }
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+  .cta-banner {
+    padding: 3rem 0;
+  }
+  .cta-content h2 {
+    font-size: 1.5rem;
+  }
+  .featured-cta {
+    margin-top: 2rem;
+  }
+  .offer-modal {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+  .offer-modal-title {
+    font-size: 1.1rem;
+  }
+  .offer-option-card img {
+    width: 36px;
+    height: 36px;
+  }
+  .offer-option-card {
+    padding: 0.55rem 0.7rem;
+  }
+  .offer-modal-actions .btn {
+    font-size: 0.82rem;
+    padding: 0.65rem 0.85rem;
   }
 }
 

@@ -47,6 +47,7 @@ function Navbar() {
           </div>
         </div>
       </nav>
+      <div className={`navbar-overlay ${isOpen ? 'open' : ''}`} onClick={closeMenu} />
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   )

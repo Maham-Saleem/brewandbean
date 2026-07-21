@@ -994,6 +994,10 @@
     gap: 0.6rem;
   }
 
+  .co-actions .btn {
+    min-height: 44px;
+  }
+
   .co-delivery-options {
     flex-direction: column;
     gap: 0.6rem;
@@ -1020,6 +1024,19 @@
   .co-link-btn {
     text-align: center;
   }
+
+  .co-addr-card {
+    flex-wrap: wrap;
+  }
+
+  .co-confirmation .btn {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .co-card-form {
+    padding: 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1029,5 +1046,110 @@
 
   .co-step + .co-step::before {
     width: 14px;
+  }
+
+  .co-step-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 0.68rem;
+  }
+
+  .co-title {
+    font-size: 1.15rem;
+  }
+
+  .co-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .co-delivery-card {
+    padding: 0.9rem 0.85rem;
+    min-height: 44px;
+  }
+
+  .co-fg input,
+  .co-fg textarea {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .co-review-item img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .co-review-info h4 {
+    font-size: 0.82rem;
+  }
+
+  .co-payment-card {
+    padding: 0.85rem 0.9rem;
+    min-height: 44px;
+  }
+
+  .co-summary-card {
+    margin-bottom: 0.85rem;
+  }
+
+  .co-summary-line {
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+  }
+
+  .co-summary-line span {
+    font-size: 0.8rem;
+  }
+
+  .co-confirm-details {
+    padding: 0.85rem 1rem;
+  }
+
+  .co-order-num {
+    padding: 0.6rem 1rem;
+  }
+
+  .co-order-num strong {
+    font-size: 1rem;
+  }
+
+  .co-actions .btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .co-qty-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .co-review-total {
+    font-size: 0.82rem;
+  }
+
+  .co-total-row {
+    font-size: 0.82rem;
+  }
+
+  .co-total-grand {
+    font-size: 0.92rem;
+  }
+
+  .co-total-grand strong {
+    font-size: 1rem;
+  }
+
+  .co-profile-banner {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .co-profile-banner-info strong {
+    font-size: 0.75rem;
+  }
+
+  .co-profile-banner-info span {
+    font-size: 0.65rem;
   }
 }

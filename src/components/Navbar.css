@@ -84,8 +84,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: none;
   border-radius: 50%;
   background: none;
@@ -101,14 +101,14 @@
 
 .cart-badge {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 4px;
+  right: 4px;
   background: var(--color-secondary);
   color: var(--color-white);
   font-size: 0.6rem;
   font-weight: 700;
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -122,12 +122,22 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.hamburger:hover {
+  background: rgba(0,0,0,0.04);
 }
 
 .hamburger span {
   display: block;
-  width: 18px;
+  width: 20px;
   height: 2px;
   background-color: var(--color-primary);
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -146,9 +156,22 @@
   transform: rotate(-45deg) translate(4px, -4px);
 }
 
+/* Mobile menu overlay */
+.navbar-overlay {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     height: 52px;
+  }
+
+  .navbar-logo {
+    font-size: 1.15rem;
+  }
+
+  .logo-icon {
+    font-size: 1.3rem;
   }
 
   .hamburger {
@@ -169,6 +192,7 @@
     opacity: 0;
     pointer-events: none;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 999;
   }
 
   .navbar-links.open {
@@ -185,5 +209,48 @@
 
   .navbar-links a::after {
     display: none;
+  }
+
+  .navbar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 24, 16, 0.35);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .navbar-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    height: 48px;
+  }
+
+  .navbar-logo {
+    font-size: 1.05rem;
+    gap: 0.35rem;
+  }
+
+  .cart-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cart-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hamburger {
+    padding: 8px;
+    min-width: 40px;
+    min-height: 40px;
   }
 }
