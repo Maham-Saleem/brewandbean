@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom'
 import './Home.css'
 
+const offers = [
+  { title: 'Morning Bliss', desc: '20% off all espresso-based drinks to start your day right.', badge: '20% OFF', valid: 'Every Morning 8 AM – 11 AM', image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=500&h=350&fit=crop' },
+  { title: 'Sweet Tooth Special', desc: 'Buy one pastry, get one free. Perfect with your favorite brew.', badge: 'BOGO', valid: 'Available All Day', image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=500&h=350&fit=crop' },
+  { title: 'Chill Hour', desc: 'Enjoy $1 off any iced or cold drink during our afternoon happy hour.', badge: '$1 OFF', valid: 'Daily 2 PM – 4 PM', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=350&fit=crop' },
+  { title: 'Brew & Bean Rewards', desc: 'Buy 9 drinks and get your 10th free. Every sip brings you closer.', badge: 'LOYALTY', valid: 'Ongoing — Ask In-Store', image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500&h=350&fit=crop' },
+]
+
 const featuredDrinks = [
   { name: 'Signature Latte', desc: 'Espresso with steamed milk and a touch of vanilla', price: '$5.50', image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop' },
   { name: 'Cold Brew', desc: 'Slow-steeped for 20 hours, served over ice', price: '$4.75', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop' },
@@ -27,6 +34,29 @@ function Home() {
           <div className="hero-actions">
             <Link to="/menu" className="btn btn-primary">Explore Our Menu</Link>
             <Link to="/contact" className="btn btn-outline">Visit Us</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section offers">
+        <div className="container">
+          <h2 className="section-title fade-in">Special Offers</h2>
+          <p className="section-subtitle fade-in">Treat yourself — limited-time deals crafted for coffee lovers</p>
+          <div className="offers-grid">
+            {offers.map((offer, i) => (
+              <div className="offer-card fade-in" key={i} style={{ animationDelay: `${i * 0.1}s` }}>
+                <div className="offer-image">
+                  <img src={offer.image} alt={offer.title} loading="lazy" />
+                  <span className="offer-badge">{offer.badge}</span>
+                </div>
+                <div className="offer-body">
+                  <h3>{offer.title}</h3>
+                  <p className="offer-desc">{offer.desc}</p>
+                  <span className="offer-valid">{offer.valid}</span>
+                  <Link to="/menu" className="btn-offer">Claim Offer</Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
